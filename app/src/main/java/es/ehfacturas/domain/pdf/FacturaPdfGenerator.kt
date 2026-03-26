@@ -4,6 +4,9 @@ package es.ehfacturas.domain.pdf
 import android.content.Context
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.MultiFormatWriter
 import dagger.hilt.android.qualifiers.ApplicationContext
 import es.ehfacturas.data.db.entity.*
 import es.ehfacturas.data.repository.NegocioRepository
@@ -89,10 +92,13 @@ class FacturaPdfGenerator @Inject constructor(
             y = dibujarObservaciones(canvas, factura.observaciones, y)
         }
 
-        // Hash
+        // QR + Hash
         if (registro != null && registro.hashRegistro.isNotEmpty()) {
             y += 10f
-            canvas.drawText("Hash: ${registro.hashRegistro}", MARGIN, y, paintGris)
+            val qrBitmap = generarQRBitmap(registro.hashRegistro, 100)
+            canvas.drawBitmap(qrBitmap, MARGIN, y, null)
+            canvas.drawText("Hash: ${registro.hashRegistro}", MARGIN + 110f, y + 50f, paintGris)
+            y += 110f
         }
 
         pdfDocument.finishPage(page)
@@ -249,6 +255,23 @@ class FacturaPdfGenerator @Inject constructor(
         cy += 14f
 
         return cy
+    }
+
+    private fun generarQRBitmap(contenido: String, size: Int): Bitmap {
+        val hints = mapOf(
+            EncodeHintType.MARGIN to 1,
+            EncodeHintType.CHARACTER_SET to "UTF-8"
+        )
+        val matrix = MultiFormatWriter().encode(
+            contenido, BarcodeFormat.QR_CODE, size, size, hints
+        )
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        for (x in 0 until size) {
+            for (y in 0 until size) {
+                bitmap.setPixel(x, y, if (matrix[x, y]) Color.BLACK else Color.WHITE)
+            }
+        }
+        return bitmap
     }
 
     private fun dibujarObservaciones(canvas: Canvas, texto: String, y: Float): Float {
