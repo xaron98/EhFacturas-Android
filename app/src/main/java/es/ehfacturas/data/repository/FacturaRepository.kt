@@ -1,5 +1,6 @@
 package es.ehfacturas.data.repository
 
+import es.ehfacturas.data.db.dao.ClienteTotal
 import es.ehfacturas.data.db.dao.FacturaDao
 import es.ehfacturas.data.db.dao.LineaFacturaDao
 import es.ehfacturas.data.db.entity.EstadoFactura
@@ -34,6 +35,18 @@ class FacturaRepository @Inject constructor(
     fun facturacionPeriodo(desde: Date, hasta: Date): Flow<Double> = facturaDao.facturacionPeriodo(desde, hasta)
 
     suspend fun obtenerVencidas(fecha: Date): List<Factura> = facturaDao.obtenerVencidas(fecha)
+
+    fun cobradoPeriodo(desde: Date, hasta: Date): Flow<Double> = facturaDao.cobradoPeriodo(desde, hasta)
+
+    fun ivaPeriodo(desde: Date, hasta: Date): Flow<Double> = facturaDao.ivaPeriodo(desde, hasta)
+
+    fun irpfPeriodo(desde: Date, hasta: Date): Flow<Double> = facturaDao.irpfPeriodo(desde, hasta)
+
+    fun contarEmitidasPeriodo(desde: Date, hasta: Date): Flow<Int> = facturaDao.contarEmitidasPeriodo(desde, hasta)
+
+    suspend fun topClientes(desde: Date, hasta: Date, limit: Int): List<ClienteTotal> = facturaDao.topClientes(desde, hasta, limit)
+
+    suspend fun facturasParaExportar(desde: Date, hasta: Date): List<Factura> = facturaDao.facturasParaExportar(desde, hasta)
 
     suspend fun guardar(factura: Factura): Long = facturaDao.insertar(factura)
 

@@ -7,6 +7,18 @@ import es.ehfacturas.data.db.entity.LineaFactura
 import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
+data class ClienteTotal(
+    val clienteNombre: String,
+    val total: Double
+)
+
+data class FacturaMensual(
+    val mes: Int,
+    val ano: Int,
+    val facturado: Double,
+    val cobrado: Double
+)
+
 @Dao
 interface FacturaDao {
     @Query("SELECT * FROM facturas ORDER BY fecha DESC")
@@ -38,6 +50,32 @@ interface FacturaDao {
 
     @Query("SELECT * FROM facturas WHERE estado = 'EMITIDA' AND fechaVencimiento IS NOT NULL AND fechaVencimiento < :fecha")
     suspend fun obtenerVencidas(fecha: Date): List<Factura>
+
+    @Query("SELECT COALESCE(SUM(totalFactura), 0) FROM facturas WHERE estado = 'PAGADA' AND fecha BETWEEN :desde AND :hasta")
+    fun cobradoPeriodo(desde: Date, hasta: Date): Flow<Double>
+
+    @Query("SELECT COALESCE(SUM(totalIVA), 0) FROM facturas WHERE estado IN ('EMITIDA', 'PAGADA') AND fecha BETWEEN :desde AND :hasta")
+    fun ivaPeriodo(desde: Date, hasta: Date): Flow<Double>
+
+    @Query("SELECT COALESCE(SUM(totalIRPF), 0) FROM facturas WHERE estado IN ('EMITIDA', 'PAGADA') AND fecha BETWEEN :desde AND :hasta")
+    fun irpfPeriodo(desde: Date, hasta: Date): Flow<Double>
+
+    @Query("SELECT COUNT(*) FROM facturas WHERE estado IN ('EMITIDA', 'PAGADA') AND fecha BETWEEN :desde AND :hasta")
+    fun contarEmitidasPeriodo(desde: Date, hasta: Date): Flow<Int>
+
+    @Query("""
+        SELECT clienteNombre, SUM(totalFactura) as total FROM facturas
+        WHERE estado IN ('EMITIDA', 'PAGADA') AND fecha BETWEEN :desde AND :hasta
+        GROUP BY clienteNombre ORDER BY total DESC LIMIT :limit
+    """)
+    suspend fun topClientes(desde: Date, hasta: Date, limit: Int): List<ClienteTotal>
+
+    @Query("""
+        SELECT * FROM facturas
+        WHERE estado IN ('EMITIDA', 'PAGADA') AND fecha BETWEEN :desde AND :hasta
+        ORDER BY fecha ASC
+    """)
+    suspend fun facturasParaExportar(desde: Date, hasta: Date): List<Factura>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(factura: Factura): Long

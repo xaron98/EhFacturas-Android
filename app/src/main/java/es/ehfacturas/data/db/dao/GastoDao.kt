@@ -5,6 +5,11 @@ import es.ehfacturas.data.db.entity.Gasto
 import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
+data class CategoriaTotal(
+    val categoria: String,
+    val total: Double
+)
+
 @Dao
 interface GastoDao {
     @Query("SELECT * FROM gastos ORDER BY fecha DESC")
@@ -24,6 +29,13 @@ interface GastoDao {
 
     @Query("SELECT COUNT(*) FROM gastos")
     fun contarTodos(): Flow<Int>
+
+    @Query("""
+        SELECT categoria, COALESCE(SUM(importe), 0) as total FROM gastos
+        WHERE fecha BETWEEN :desde AND :hasta
+        GROUP BY categoria ORDER BY total DESC
+    """)
+    suspend fun gastosPorCategoria(desde: Date, hasta: Date): List<CategoriaTotal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(gasto: Gasto): Long

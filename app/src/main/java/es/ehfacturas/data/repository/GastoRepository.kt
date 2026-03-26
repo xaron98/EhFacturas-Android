@@ -1,5 +1,6 @@
 package es.ehfacturas.data.repository
 
+import es.ehfacturas.data.db.dao.CategoriaTotal
 import es.ehfacturas.data.db.dao.GastoDao
 import es.ehfacturas.data.db.entity.Gasto
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,8 @@ class GastoRepository @Inject constructor(
     fun totalPeriodo(desde: Date, hasta: Date): Flow<Double> = gastoDao.totalPeriodo(desde, hasta)
 
     fun contarTodos(): Flow<Int> = gastoDao.contarTodos()
+
+    suspend fun gastosPorCategoria(desde: Date, hasta: Date): List<CategoriaTotal> = gastoDao.gastosPorCategoria(desde, hasta)
 
     suspend fun guardar(gasto: Gasto): Long = gastoDao.insertar(gasto)
 
