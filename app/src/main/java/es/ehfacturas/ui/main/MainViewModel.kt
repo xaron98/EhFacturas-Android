@@ -40,6 +40,14 @@ class MainViewModel @Inject constructor(
     private val _textoManual = MutableStateFlow("")
     val textoManual: StateFlow<String> = _textoManual.asStateFlow()
 
+    private val _navegarAFactura = MutableSharedFlow<Long>()
+    val navegarAFactura: SharedFlow<Long> = _navegarAFactura.asSharedFlow()
+
+    private val _mostrarConfigIA = MutableStateFlow(false)
+    val mostrarConfigIA: StateFlow<Boolean> = _mostrarConfigIA.asStateFlow()
+
+    fun ocultarConfigIA() { _mostrarConfigIA.value = false }
+
     val estaEscuchando: StateFlow<Boolean> = speechService.estaEscuchando
     val textoTranscrito: StateFlow<String> = speechService.textoTranscrito
     val nivelAudio: StateFlow<Float> = speechService.nivelAudio
@@ -89,6 +97,7 @@ class MainViewModel @Inject constructor(
                         tipo = TipoMensaje.ERROR,
                         texto = provider.unavailableReason
                     ))
+                    _mostrarConfigIA.value = true
                     _estado.value = EstadoProcesamiento.ERROR
                     return@launch
                 }
@@ -105,14 +114,25 @@ class MainViewModel @Inject constructor(
                     toolExecutor.executeTool(toolName, arguments)
                 }
 
+                // Limpiar [ID:XX] del texto mostrado
+                val textoLimpio = resultado.texto.replace(Regex("\\s*\\[ID:\\d+]"), "")
+
+                // Navegar a factura si se creó una
+                if (resultado.toolUsed == "crear_factura") {
+                    val idMatch = Regex("\\[ID:(\\d+)]").find(resultado.texto)
+                    idMatch?.groupValues?.get(1)?.toLongOrNull()?.let { facturaId ->
+                        _navegarAFactura.emit(facturaId)
+                    }
+                }
+
                 addMensaje(MensajeChat(
                     tipo = TipoMensaje.IA,
-                    texto = resultado.texto,
+                    texto = textoLimpio,
                     toolUsed = resultado.toolUsed
                 ))
 
                 // Leer respuesta en voz alta
-                ttsService.hablar(resultado.texto)
+                ttsService.hablar(textoLimpio)
 
                 _estado.value = EstadoProcesamiento.RESPONDIDO
 

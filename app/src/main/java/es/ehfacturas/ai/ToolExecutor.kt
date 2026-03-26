@@ -174,7 +174,7 @@ class ToolExecutor @Inject constructor(
         )
 
         val tipo = if (esPresupuesto) "Presupuesto" else "Factura"
-        return "$tipo $numero creada para $nombreCliente. Total: ${formatoMoneda.format(total)}"
+        return "$tipo $numero creada para $nombreCliente. Total: ${formatoMoneda.format(total)} [ID:$facturaId]"
     }
 
     private suspend fun parsearArticulosTexto(texto: String): List<LineaFactura> {

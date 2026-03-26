@@ -38,6 +38,7 @@ fun MainScreen(
     val estaEscuchando by viewModel.estaEscuchando.collectAsStateWithLifecycle()
     val textoTranscrito by viewModel.textoTranscrito.collectAsStateWithLifecycle()
     val errorSpeech by viewModel.errorSpeech.collectAsStateWithLifecycle()
+    val mostrarConfigIA by viewModel.mostrarConfigIA.collectAsStateWithLifecycle()
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -84,6 +85,27 @@ fun MainScreen(
         if (mensajes.isNotEmpty()) {
             listState.animateScrollToItem(mensajes.size - 1)
         }
+    }
+
+    // Navegar a factura creada por IA
+    LaunchedEffect(Unit) {
+        viewModel.navegarAFactura.collect { facturaId ->
+            onNavigateToFactura(facturaId)
+        }
+    }
+
+    // Diálogo de configuración de IA
+    if (mostrarConfigIA) {
+        AlertDialog(
+            onDismissRequest = { viewModel.ocultarConfigIA() },
+            title = { Text("Configurar IA") },
+            text = { Text("No hay proveedor de IA disponible. Configura tu API key de Claude o OpenAI en Ajustes.") },
+            confirmButton = {
+                TextButton(onClick = { viewModel.ocultarConfigIA() }) {
+                    Text("Entendido")
+                }
+            }
+        )
     }
 
     Scaffold(
