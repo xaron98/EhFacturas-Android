@@ -52,15 +52,17 @@ class SpeechService @Inject constructor(
             setRecognitionListener(createListener())
         }
 
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+        speechRecognizer?.startListening(createRecognizerIntent())
+        _estaEscuchando.value = true
+    }
+
+    private fun createRecognizerIntent(): Intent {
+        return Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale("es", "ES").toLanguageTag())
             putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
             putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
         }
-
-        speechRecognizer?.startListening(intent)
-        _estaEscuchando.value = true
     }
 
     fun detenerEscucha() {
@@ -109,6 +111,14 @@ class SpeechService @Inject constructor(
         override fun onError(error: Int) {
             _estaEscuchando.value = false
             _nivelAudio.value = 0f
+
+            // Auto-retry: silencio detectado, reintentar escucha sin mostrar error
+            if (error == SpeechRecognizer.ERROR_NO_MATCH && onResultado != null) {
+                _estaEscuchando.value = true
+                speechRecognizer?.startListening(createRecognizerIntent())
+                return
+            }
+
             _errorMensaje.value = when (error) {
                 SpeechRecognizer.ERROR_AUDIO -> "Error de audio"
                 SpeechRecognizer.ERROR_CLIENT -> null // Usuario canceló

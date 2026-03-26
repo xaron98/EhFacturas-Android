@@ -25,6 +25,9 @@ class TTSService @Inject constructor(
     private var tts: TextToSpeech? = null
     private var isInitialized = false
 
+    // Cola de mensajes pendientes de reproducir
+    private val cola = ArrayDeque<String>()
+
     private val _hablando = MutableStateFlow(false)
     val hablando: StateFlow<Boolean> = _hablando.asStateFlow()
 
@@ -63,10 +66,17 @@ class TTSService @Inject constructor(
                     _hablando.value = true
                 }
                 override fun onDone(utteranceId: String?) {
-                    _hablando.value = false
+                    // Reproducir el siguiente mensaje de la cola si hay alguno
+                    val siguiente = cola.removeFirstOrNull()
+                    if (siguiente != null) {
+                        reproducirDirecto(siguiente)
+                    } else {
+                        _hablando.value = false
+                    }
                 }
                 @Deprecated("Deprecated in Java")
                 override fun onError(utteranceId: String?) {
+                    cola.clear()
                     _hablando.value = false
                 }
             })
@@ -80,25 +90,38 @@ class TTSService @Inject constructor(
             return
         }
 
-        // Limpiar texto: quitar emojis y markdown
-        val textoLimpio = texto
-            .replace(Regex("[\\p{So}\\p{Cn}]"), "")  // Emojis
-            .replace(Regex("[*_~`#>]"), "")            // Markdown
-            .replace(Regex("\\[.*?]\\(.*?\\)"), "")    // Links
-            .replace(Regex("•|–|—"), ",")               // Bullets
-            .trim()
-
+        val textoLimpio = limpiarTexto(texto)
         if (textoLimpio.isEmpty()) return
 
+        if (_hablando.value) {
+            // Ya hay reproducción en curso: encolar el mensaje
+            cola.addLast(textoLimpio)
+        } else {
+            reproducirDirecto(textoLimpio)
+        }
+    }
+
+    /** Envía el texto al motor TTS directamente (sin pasar por la cola). */
+    private fun reproducirDirecto(texto: String) {
         tts?.speak(
-            textoLimpio,
+            texto,
             TextToSpeech.QUEUE_FLUSH,
             null,
             UUID.randomUUID().toString()
         )
     }
 
+    /** Limpia el texto eliminando emojis y formato markdown. */
+    private fun limpiarTexto(texto: String): String =
+        texto
+            .replace(Regex("[\\p{So}\\p{Cn}]"), "")  // Emojis
+            .replace(Regex("[*_~`#>]"), "")            // Markdown
+            .replace(Regex("\\[.*?]\\(.*?\\)"), "")    // Links
+            .replace(Regex("•|–|—"), ",")               // Bullets
+            .trim()
+
     fun detener() {
+        cola.clear()
         tts?.stop()
         _hablando.value = false
     }
