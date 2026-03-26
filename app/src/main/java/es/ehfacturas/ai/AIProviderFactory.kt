@@ -8,28 +8,32 @@ import javax.inject.Singleton
 @Singleton
 class AIProviderFactory @Inject constructor(
     private val appPreferences: AppPreferences,
+    private val geminiNanoProvider: GeminiNanoProvider,
+    private val gemmaLocalProvider: GemmaLocalProvider,
     private val claudeProvider: ClaudeAIProvider,
     private val openaiProvider: OpenAIProvider
 ) {
-    private var cachedProvider: AIProvider? = null
-
     suspend fun getProvider(): AIProvider {
-        cachedProvider?.let { return it }
+        if (geminiNanoProvider.isAvailable) return geminiNanoProvider
+        if (gemmaLocalProvider.isAvailable) return gemmaLocalProvider
+        return getCloudProvider()
+    }
 
-        val cloudProvider = appPreferences.cloudProvider.first()
-
-        val provider = when (cloudProvider) {
-            "claude" -> if (claudeProvider.isAvailable) claudeProvider else UnavailableAIProvider()
-            "openai" -> if (openaiProvider.isAvailable) openaiProvider else UnavailableAIProvider()
-            else -> UnavailableAIProvider()
+    suspend fun getCloudProvider(): AIProvider {
+        val preferred = appPreferences.cloudProvider.first()
+        return when (preferred) {
+            "claude" -> if (claudeProvider.isAvailable) claudeProvider else
+                        if (openaiProvider.isAvailable) openaiProvider else UnavailableAIProvider()
+            "openai" -> if (openaiProvider.isAvailable) openaiProvider else
+                         if (claudeProvider.isAvailable) claudeProvider else UnavailableAIProvider()
+            else -> if (claudeProvider.isAvailable) claudeProvider else UnavailableAIProvider()
         }
-
-        cachedProvider = provider
-        return provider
     }
 
     fun resetProvider() {
-        cachedProvider?.resetSession()
-        cachedProvider = null
+        geminiNanoProvider.resetSession()
+        gemmaLocalProvider.resetSession()
+        claudeProvider.resetSession()
+        openaiProvider.resetSession()
     }
 }

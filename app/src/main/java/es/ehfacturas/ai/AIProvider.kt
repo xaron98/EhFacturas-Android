@@ -9,6 +9,7 @@ data class AICommandResult(
 
 // Tipo de proveedor de IA
 enum class AIProviderType(val descripcion: String) {
+    GEMINI_NANO("Gemini Nano (on-device)"),
     GEMMA("Gemma 2B (on-device)"),
     CLAUDE("Claude (cloud)"),
     OPENAI("OpenAI (cloud)"),
