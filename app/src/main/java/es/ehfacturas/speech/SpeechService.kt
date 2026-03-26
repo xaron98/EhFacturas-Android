@@ -157,15 +157,22 @@ class SpeechService @Inject constructor(
 
     // --- Reinicio transparente ---
 
-    private fun reiniciarEscuchaTransparente() {
+    private fun reiniciarEscuchaTransparente(delayMs: Long = 300) {
         if (!escuchaContinuaActiva) return
-        // Reiniciar el recognizer sin que el usuario lo note
         _estaEscuchando.value = true
         handler.postDelayed({
             if (escuchaContinuaActiva) {
-                iniciarRecognizer()
+                try {
+                    speechRecognizer?.destroy()
+                    speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context).apply {
+                        setRecognitionListener(createListener())
+                    }
+                    speechRecognizer?.startListening(createRecognizerIntent())
+                } catch (_: Exception) {
+                    // Si falla el reinicio, dejar de intentar
+                }
             }
-        }, 100) // Pequeño delay para evitar errores de reinicio rápido
+        }, delayMs)
     }
 
     // --- Listener ---
@@ -197,15 +204,21 @@ class SpeechService @Inject constructor(
                 SpeechRecognizer.ERROR_NO_MATCH,
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> {
                     if (escuchaContinuaActiva) {
-                        // Reiniciar transparentemente
                         reiniciarTimerSilencio()
-                        reiniciarEscuchaTransparente()
+                        reiniciarEscuchaTransparente(300)
                     }
-                    // Si no está activa, silenciar — no es un error real
+                    return
+                }
+                11, 10 -> {
+                    // ERROR_SERVER_DISCONNECTED (11), ERROR_TOO_MANY_REQUESTS (10)
+                    // Reiniciar con delay más largo para no saturar el servidor
+                    if (escuchaContinuaActiva) {
+                        reiniciarTimerSilencio()
+                        reiniciarEscuchaTransparente(1000)
+                    }
                     return
                 }
                 SpeechRecognizer.ERROR_CLIENT -> {
-                    // Usuario canceló
                     return
                 }
             }
