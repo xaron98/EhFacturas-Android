@@ -30,7 +30,8 @@ data class FacturaDetalleUiState(
     val aplicarIRPF: Boolean = false,
     val irpfPorcentaje: Double = 15.0,
     val mensaje: String? = null,
-    val facturaIdNueva: Long? = null  // Para navegar a factura duplicada/rectificativa
+    val facturaIdNueva: Long? = null,  // Para navegar a factura duplicada/rectificativa
+    val pdfParaCompartir: String? = null  // ruta del PDF a compartir
 )
 
 @HiltViewModel
@@ -178,6 +179,23 @@ class FacturaDetalleViewModel @Inject constructor(
             facturaRepository.actualizar(facturaConPdf)
             _uiState.update { it.copy(factura = facturaConPdf, mensaje = "PDF generado") }
         }
+    }
+
+    fun generarYCompartirPdf() {
+        viewModelScope.launch {
+            val state = _uiState.value
+            val factura = state.factura ?: return@launch
+            val registro = state.registros.firstOrNull()
+
+            val archivo = pdfGenerator.generar(factura, state.lineas, registro)
+            val facturaConPdf = factura.copy(pdfRuta = archivo.absolutePath)
+            facturaRepository.actualizar(facturaConPdf)
+            _uiState.update { it.copy(factura = facturaConPdf, pdfParaCompartir = archivo.absolutePath) }
+        }
+    }
+
+    fun limpiarCompartir() {
+        _uiState.update { it.copy(pdfParaCompartir = null) }
     }
 
     fun limpiarMensaje() {

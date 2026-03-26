@@ -1,6 +1,7 @@
 // app/src/main/java/es/ehfacturas/ui/factura/FacturaDetalleScreen.kt
 package es.ehfacturas.ui.factura
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,14 +11,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import es.ehfacturas.data.db.entity.EstadoFactura
 import es.ehfacturas.domain.validation.Formateadores
 import es.ehfacturas.ui.factura.components.AccionesRow
 import es.ehfacturas.ui.factura.components.TotalesSection
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -48,6 +52,29 @@ fun FacturaDetalleScreen(
         uiState.facturaIdNueva?.let {
             onNavigateToFactura(it)
             viewModel.limpiarNavegacion()
+        }
+    }
+
+    val context = LocalContext.current
+
+    // Compartir PDF
+    LaunchedEffect(uiState.pdfParaCompartir) {
+        uiState.pdfParaCompartir?.let { pdfPath ->
+            val file = File(pdfPath)
+            if (file.exists()) {
+                val uri = FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    file
+                )
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "application/pdf"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                context.startActivity(Intent.createChooser(intent, "Compartir factura"))
+            }
+            viewModel.limpiarCompartir()
         }
     }
 
@@ -113,7 +140,7 @@ fun FacturaDetalleScreen(
                 onAnular = { viewModel.anular() },
                 onDuplicar = { viewModel.duplicar() },
                 onConvertir = { viewModel.convertirEnFactura() },
-                onPdf = { /* Task Fase 4 */ }
+                onPdf = { viewModel.generarYCompartirPdf() }
             )
 
             HorizontalDivider()
