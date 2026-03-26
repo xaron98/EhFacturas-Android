@@ -1,0 +1,1252 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "ce544e2b5021ace62adb528c9f2e782c",
+    "entities": [
+      {
+        "tableName": "negocios",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `nif` TEXT NOT NULL, `direccion` TEXT NOT NULL, `codigoPostal` TEXT NOT NULL, `ciudad` TEXT NOT NULL, `provincia` TEXT NOT NULL, `telefono` TEXT NOT NULL, `email` TEXT NOT NULL, `logoRuta` TEXT, `ivaGeneral` REAL NOT NULL, `ivaReducido` REAL NOT NULL, `irpfPorcentaje` REAL NOT NULL, `aplicarIRPF` INTEGER NOT NULL, `prefijoFactura` TEXT NOT NULL, `siguienteNumero` INTEGER NOT NULL, `notas` TEXT NOT NULL, `usarEntornoPruebas` INTEGER NOT NULL, `certificadoInstalado` INTEGER NOT NULL, `certificadoCaducidad` INTEGER, `envioAutomatico` INTEGER NOT NULL, `cloudProvider` TEXT NOT NULL, `temaApp` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nif",
+            "columnName": "nif",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoPostal",
+            "columnName": "codigoPostal",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ciudad",
+            "columnName": "ciudad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "provincia",
+            "columnName": "provincia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "telefono",
+            "columnName": "telefono",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "logoRuta",
+            "columnName": "logoRuta",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "ivaGeneral",
+            "columnName": "ivaGeneral",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ivaReducido",
+            "columnName": "ivaReducido",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "irpfPorcentaje",
+            "columnName": "irpfPorcentaje",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aplicarIRPF",
+            "columnName": "aplicarIRPF",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prefijoFactura",
+            "columnName": "prefijoFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "siguienteNumero",
+            "columnName": "siguienteNumero",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notas",
+            "columnName": "notas",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "usarEntornoPruebas",
+            "columnName": "usarEntornoPruebas",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "certificadoInstalado",
+            "columnName": "certificadoInstalado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "certificadoCaducidad",
+            "columnName": "certificadoCaducidad",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "envioAutomatico",
+            "columnName": "envioAutomatico",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cloudProvider",
+            "columnName": "cloudProvider",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temaApp",
+            "columnName": "temaApp",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "clientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `nif` TEXT NOT NULL, `direccion` TEXT NOT NULL, `codigoPostal` TEXT NOT NULL, `ciudad` TEXT NOT NULL, `provincia` TEXT NOT NULL, `telefono` TEXT NOT NULL, `email` TEXT NOT NULL, `observaciones` TEXT NOT NULL, `fechaCreacion` INTEGER NOT NULL, `fechaModificacion` INTEGER NOT NULL, `activo` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nif",
+            "columnName": "nif",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoPostal",
+            "columnName": "codigoPostal",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ciudad",
+            "columnName": "ciudad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "provincia",
+            "columnName": "provincia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "telefono",
+            "columnName": "telefono",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaModificacion",
+            "columnName": "fechaModificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activo",
+            "columnName": "activo",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "categorias",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `icono` TEXT NOT NULL, `orden` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "icono",
+            "columnName": "icono",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orden",
+            "columnName": "orden",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "articulos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `referencia` TEXT NOT NULL, `nombre` TEXT NOT NULL, `descripcion` TEXT NOT NULL, `precioUnitario` REAL NOT NULL, `precioCoste` REAL NOT NULL, `unidad` TEXT NOT NULL, `tipoIVA` TEXT NOT NULL, `proveedor` TEXT NOT NULL, `urlProveedor` TEXT NOT NULL, `referenciaProveedor` TEXT NOT NULL, `categoriaId` INTEGER, `etiquetas` TEXT NOT NULL, `activo` INTEGER NOT NULL, `fechaCreacion` INTEGER NOT NULL, `fechaModificacion` INTEGER NOT NULL, FOREIGN KEY(`categoriaId`) REFERENCES `categorias`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "referencia",
+            "columnName": "referencia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precioUnitario",
+            "columnName": "precioUnitario",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precioCoste",
+            "columnName": "precioCoste",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unidad",
+            "columnName": "unidad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoIVA",
+            "columnName": "tipoIVA",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "proveedor",
+            "columnName": "proveedor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "urlProveedor",
+            "columnName": "urlProveedor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "referenciaProveedor",
+            "columnName": "referenciaProveedor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoriaId",
+            "columnName": "categoriaId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "etiquetas",
+            "columnName": "etiquetas",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activo",
+            "columnName": "activo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaModificacion",
+            "columnName": "fechaModificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_articulos_categoriaId",
+            "unique": false,
+            "columnNames": [
+              "categoriaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_articulos_categoriaId` ON `${TABLE_NAME}` (`categoriaId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "categorias",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "categoriaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "facturas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `numeroFactura` TEXT NOT NULL, `fecha` INTEGER NOT NULL, `fechaVencimiento` INTEGER, `estado` TEXT NOT NULL, `clienteId` INTEGER, `clienteNombre` TEXT NOT NULL, `clienteNIF` TEXT NOT NULL, `clienteDireccion` TEXT NOT NULL, `baseImponible` REAL NOT NULL, `totalIVA` REAL NOT NULL, `totalIRPF` REAL NOT NULL, `totalFactura` REAL NOT NULL, `descuentoGlobalPorcentaje` REAL NOT NULL, `observaciones` TEXT NOT NULL, `notasInternas` TEXT NOT NULL, `promptOriginal` TEXT, `pdfRuta` TEXT, `firmaClienteRuta` TEXT, `fechaCreacion` INTEGER NOT NULL, `fechaModificacion` INTEGER NOT NULL, `tipoFactura` TEXT NOT NULL, `facturaRectificadaId` INTEGER, FOREIGN KEY(`clienteId`) REFERENCES `clientes`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`facturaRectificadaId`) REFERENCES `facturas`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroFactura",
+            "columnName": "numeroFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaVencimiento",
+            "columnName": "fechaVencimiento",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteId",
+            "columnName": "clienteId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "clienteNombre",
+            "columnName": "clienteNombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteNIF",
+            "columnName": "clienteNIF",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteDireccion",
+            "columnName": "clienteDireccion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "baseImponible",
+            "columnName": "baseImponible",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalIVA",
+            "columnName": "totalIVA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalIRPF",
+            "columnName": "totalIRPF",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalFactura",
+            "columnName": "totalFactura",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descuentoGlobalPorcentaje",
+            "columnName": "descuentoGlobalPorcentaje",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notasInternas",
+            "columnName": "notasInternas",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "promptOriginal",
+            "columnName": "promptOriginal",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "pdfRuta",
+            "columnName": "pdfRuta",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "firmaClienteRuta",
+            "columnName": "firmaClienteRuta",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaModificacion",
+            "columnName": "fechaModificacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoFactura",
+            "columnName": "tipoFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "facturaRectificadaId",
+            "columnName": "facturaRectificadaId",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_facturas_clienteId",
+            "unique": false,
+            "columnNames": [
+              "clienteId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_facturas_clienteId` ON `${TABLE_NAME}` (`clienteId`)"
+          },
+          {
+            "name": "index_facturas_facturaRectificadaId",
+            "unique": false,
+            "columnNames": [
+              "facturaRectificadaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_facturas_facturaRectificadaId` ON `${TABLE_NAME}` (`facturaRectificadaId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "clientes",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "clienteId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "facturas",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "facturaRectificadaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "lineas_factura",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `orden` INTEGER NOT NULL, `facturaId` INTEGER NOT NULL, `articuloId` INTEGER, `referencia` TEXT NOT NULL, `concepto` TEXT NOT NULL, `cantidad` REAL NOT NULL, `unidad` TEXT NOT NULL, `precioUnitario` REAL NOT NULL, `descuentoPorcentaje` REAL NOT NULL, `porcentajeIVA` REAL NOT NULL, `subtotal` REAL NOT NULL, FOREIGN KEY(`facturaId`) REFERENCES `facturas`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`articuloId`) REFERENCES `articulos`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orden",
+            "columnName": "orden",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "facturaId",
+            "columnName": "facturaId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "articuloId",
+            "columnName": "articuloId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "referencia",
+            "columnName": "referencia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "concepto",
+            "columnName": "concepto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cantidad",
+            "columnName": "cantidad",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unidad",
+            "columnName": "unidad",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precioUnitario",
+            "columnName": "precioUnitario",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descuentoPorcentaje",
+            "columnName": "descuentoPorcentaje",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "porcentajeIVA",
+            "columnName": "porcentajeIVA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subtotal",
+            "columnName": "subtotal",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_lineas_factura_facturaId",
+            "unique": false,
+            "columnNames": [
+              "facturaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_lineas_factura_facturaId` ON `${TABLE_NAME}` (`facturaId`)"
+          },
+          {
+            "name": "index_lineas_factura_articuloId",
+            "unique": false,
+            "columnNames": [
+              "articuloId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_lineas_factura_articuloId` ON `${TABLE_NAME}` (`articuloId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "facturas",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "facturaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "articulos",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "articuloId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gastos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `concepto` TEXT NOT NULL, `importe` REAL NOT NULL, `fecha` INTEGER NOT NULL, `categoria` TEXT NOT NULL, `proveedor` TEXT NOT NULL, `deducibleIVA` INTEGER NOT NULL, `importeIVA` REAL NOT NULL, `observaciones` TEXT NOT NULL, `fechaCreacion` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "concepto",
+            "columnName": "concepto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importe",
+            "columnName": "importe",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoria",
+            "columnName": "categoria",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "proveedor",
+            "columnName": "proveedor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deducibleIVA",
+            "columnName": "deducibleIVA",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importeIVA",
+            "columnName": "importeIVA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "registros_facturacion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `tipoRegistro` TEXT NOT NULL, `nifEmisor` TEXT NOT NULL, `numeroFactura` TEXT NOT NULL, `serieFactura` TEXT NOT NULL, `fechaExpedicion` INTEGER NOT NULL, `tipoFactura` TEXT NOT NULL, `facturaRectificadaNumero` TEXT, `descripcionOperacion` TEXT NOT NULL, `baseImponible` REAL NOT NULL, `totalIVA` REAL NOT NULL, `totalIRPF` REAL NOT NULL, `importeTotal` REAL NOT NULL, `nifDestinatario` TEXT NOT NULL, `nombreDestinatario` TEXT NOT NULL, `hashRegistro` TEXT NOT NULL, `hashRegistroAnterior` TEXT NOT NULL, `fechaHoraGeneracion` INTEGER NOT NULL, `facturaId` INTEGER NOT NULL, `estadoEnvio` TEXT NOT NULL, `respuestaAEAT` TEXT NOT NULL, `fechaEnvio` INTEGER, FOREIGN KEY(`facturaId`) REFERENCES `facturas`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoRegistro",
+            "columnName": "tipoRegistro",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nifEmisor",
+            "columnName": "nifEmisor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroFactura",
+            "columnName": "numeroFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serieFactura",
+            "columnName": "serieFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaExpedicion",
+            "columnName": "fechaExpedicion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoFactura",
+            "columnName": "tipoFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "facturaRectificadaNumero",
+            "columnName": "facturaRectificadaNumero",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descripcionOperacion",
+            "columnName": "descripcionOperacion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "baseImponible",
+            "columnName": "baseImponible",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalIVA",
+            "columnName": "totalIVA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalIRPF",
+            "columnName": "totalIRPF",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importeTotal",
+            "columnName": "importeTotal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nifDestinatario",
+            "columnName": "nifDestinatario",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombreDestinatario",
+            "columnName": "nombreDestinatario",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hashRegistro",
+            "columnName": "hashRegistro",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hashRegistroAnterior",
+            "columnName": "hashRegistroAnterior",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaHoraGeneracion",
+            "columnName": "fechaHoraGeneracion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "facturaId",
+            "columnName": "facturaId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "estadoEnvio",
+            "columnName": "estadoEnvio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "respuestaAEAT",
+            "columnName": "respuestaAEAT",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaEnvio",
+            "columnName": "fechaEnvio",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_registros_facturacion_facturaId",
+            "unique": false,
+            "columnNames": [
+              "facturaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_registros_facturacion_facturaId` ON `${TABLE_NAME}` (`facturaId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "facturas",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "facturaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "eventos_sif",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `tipo` TEXT NOT NULL, `descripcion` TEXT NOT NULL, `detalles` TEXT NOT NULL, `numeroFactura` TEXT NOT NULL, `usuario` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "detalles",
+            "columnName": "detalles",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroFactura",
+            "columnName": "numeroFactura",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "usuario",
+            "columnName": "usuario",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "facturas_recurrentes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `clienteNombre` TEXT NOT NULL, `clienteNIF` TEXT NOT NULL, `articulosTexto` TEXT NOT NULL, `importeTotal` REAL NOT NULL, `frecuencia` TEXT NOT NULL, `proximaFecha` INTEGER NOT NULL, `activo` INTEGER NOT NULL, `vecesGenerada` INTEGER NOT NULL, `fechaCreacion` INTEGER NOT NULL, `clienteId` INTEGER, FOREIGN KEY(`clienteId`) REFERENCES `clientes`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteNombre",
+            "columnName": "clienteNombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteNIF",
+            "columnName": "clienteNIF",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "articulosTexto",
+            "columnName": "articulosTexto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importeTotal",
+            "columnName": "importeTotal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "frecuencia",
+            "columnName": "frecuencia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "proximaFecha",
+            "columnName": "proximaFecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activo",
+            "columnName": "activo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vecesGenerada",
+            "columnName": "vecesGenerada",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clienteId",
+            "columnName": "clienteId",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_facturas_recurrentes_clienteId",
+            "unique": false,
+            "columnNames": [
+              "clienteId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_facturas_recurrentes_clienteId` ON `${TABLE_NAME}` (`clienteId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "clientes",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "clienteId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "plantillas_factura",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `articulosTexto` TEXT NOT NULL, `observaciones` TEXT NOT NULL, `fechaCreacion` INTEGER NOT NULL, `vecesUsada` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "articulosTexto",
+            "columnName": "articulosTexto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vecesUsada",
+            "columnName": "vecesUsada",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "perfiles_importacion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `tipo` TEXT NOT NULL, `separador` TEXT NOT NULL, `encoding` TEXT NOT NULL, `mapeoJSON` TEXT NOT NULL, `cabecerasOriginales` TEXT NOT NULL, `fechaCreacion` INTEGER NOT NULL, `ultimoUso` INTEGER NOT NULL, `vecesUsado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "separador",
+            "columnName": "separador",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "encoding",
+            "columnName": "encoding",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mapeoJSON",
+            "columnName": "mapeoJSON",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cabecerasOriginales",
+            "columnName": "cabecerasOriginales",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaCreacion",
+            "columnName": "fechaCreacion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ultimoUso",
+            "columnName": "ultimoUso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vecesUsado",
+            "columnName": "vecesUsado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ce544e2b5021ace62adb528c9f2e782c')"
+    ]
+  }
+}
