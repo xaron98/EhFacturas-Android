@@ -21,6 +21,9 @@ interface RegistroFacturacionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(registro: RegistroFacturacion): Long
 
+    @Query("SELECT * FROM registros_facturacion ORDER BY fechaHoraGeneracion ASC")
+    suspend fun obtenerTodosSync(): List<RegistroFacturacion>
+
     @Update
     suspend fun actualizar(registro: RegistroFacturacion)
 }
