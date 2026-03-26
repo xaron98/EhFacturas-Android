@@ -24,6 +24,9 @@ interface FacturaDao {
     @Query("SELECT * FROM facturas ORDER BY fecha DESC")
     fun obtenerTodas(): Flow<List<Factura>>
 
+    @Query("SELECT * FROM facturas ORDER BY fecha DESC")
+    suspend fun obtenerTodasSync(): List<Factura>
+
     @Query("SELECT * FROM facturas WHERE id = :id")
     suspend fun obtenerPorId(id: Long): Factura?
 
@@ -50,6 +53,9 @@ interface FacturaDao {
 
     @Query("SELECT * FROM facturas WHERE estado = 'EMITIDA' AND fechaVencimiento IS NOT NULL AND fechaVencimiento < :fecha")
     suspend fun obtenerVencidas(fecha: Date): List<Factura>
+
+    @Query("SELECT * FROM facturas WHERE estado = 'EMITIDA' AND fechaVencimiento BETWEEN :desde AND :hasta")
+    suspend fun facturasVencenEntre(desde: Date, hasta: Date): List<Factura>
 
     @Query("SELECT COALESCE(SUM(totalFactura), 0) FROM facturas WHERE estado = 'PAGADA' AND fecha BETWEEN :desde AND :hasta")
     fun cobradoPeriodo(desde: Date, hasta: Date): Flow<Double>

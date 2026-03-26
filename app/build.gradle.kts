@@ -101,6 +101,17 @@ dependencies {
     // DataStore
     implementation(libs.androidx.datastore.preferences)
 
+    // Glance (widget)
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+
+    // Firebase (descomentar cuando se configure Firebase Console + google-services.json)
+    // implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    // implementation("com.google.firebase:firebase-firestore-ktx")
+    // implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Google Play Billing (descomentar cuando se configure Play Console)
+    // implementation("com.android.billingclient:billing-ktx:7.1.1")
+
     // Tests
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
