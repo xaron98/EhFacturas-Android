@@ -10,6 +10,7 @@ import es.ehfacturas.data.repository.FacturaRepository
 import es.ehfacturas.data.repository.NegocioRepository
 import es.ehfacturas.data.repository.VeriFactuRepository
 import es.ehfacturas.domain.pdf.FacturaPdfGenerator
+import es.ehfacturas.domain.verifactu.HashService
 import es.ehfacturas.domain.validation.RecalculoTotales
 import es.ehfacturas.domain.validation.TotalesFactura
 import kotlinx.coroutines.flow.*
@@ -38,6 +39,7 @@ class FacturaDetalleViewModel @Inject constructor(
     private val facturaRepository: FacturaRepository,
     private val negocioRepository: NegocioRepository,
     private val veriFactuRepository: VeriFactuRepository,
+    private val hashService: HashService,
     private val pdfGenerator: FacturaPdfGenerator
 ) : ViewModel() {
 
@@ -96,7 +98,8 @@ class FacturaDetalleViewModel @Inject constructor(
                 return@launch
             }
 
-            // La generación de hash se hará en Task de Fase 4
+            // Crear registro con hash encadenado
+            hashService.crearRegistroAlta(factura, negocio)
             val facturaEmitida = factura.copy(
                 estado = EstadoFactura.EMITIDA,
                 fechaModificacion = Date()
@@ -120,6 +123,9 @@ class FacturaDetalleViewModel @Inject constructor(
         viewModelScope.launch {
             val factura = _uiState.value.factura ?: return@launch
             if (factura.estado != EstadoFactura.EMITIDA && factura.estado != EstadoFactura.PAGADA) return@launch
+            val negocio = _uiState.value.negocio ?: return@launch
+            // Crear registro de anulación con hash
+            hashService.crearRegistroAnulacion(factura, negocio)
             val anulada = factura.copy(estado = EstadoFactura.ANULADA, fechaModificacion = Date())
             facturaRepository.actualizar(anulada)
             _uiState.update { it.copy(factura = anulada, esEditable = false, mensaje = "Factura anulada") }
