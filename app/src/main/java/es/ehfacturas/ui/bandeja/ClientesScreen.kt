@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import es.ehfacturas.data.db.entity.Cliente
+import es.ehfacturas.domain.validation.NifValidator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -216,6 +217,8 @@ private fun ClienteFormDialog(
     var telefono by remember { mutableStateOf(cliente?.telefono ?: "") }
     var email by remember { mutableStateOf(cliente?.email ?: "") }
     var observaciones by remember { mutableStateOf(cliente?.observaciones ?: "") }
+    var errorNif by remember { mutableStateOf("") }
+    var errorEmail by remember { mutableStateOf("") }
 
     AlertDialog(
         onDismissRequest = onCerrar,
@@ -236,19 +239,27 @@ private fun ClienteFormDialog(
                 item {
                     OutlinedTextField(
                         value = nif,
-                        onValueChange = { nif = it },
+                        onValueChange = { nif = it; errorNif = "" },
                         label = { Text("NIF/CIF") },
                         modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
+                        singleLine = true,
+                        isError = errorNif.isNotEmpty(),
+                        supportingText = if (errorNif.isNotEmpty()) {
+                            { Text(errorNif) }
+                        } else null
                     )
                 }
                 item {
                     OutlinedTextField(
                         value = email,
-                        onValueChange = { email = it },
+                        onValueChange = { email = it; errorEmail = "" },
                         label = { Text("Email") },
                         modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
+                        singleLine = true,
+                        isError = errorEmail.isNotEmpty(),
+                        supportingText = if (errorEmail.isNotEmpty()) {
+                            { Text(errorEmail) }
+                        } else null
                     )
                 }
                 item {
@@ -311,6 +322,18 @@ private fun ClienteFormDialog(
         confirmButton = {
             Button(
                 onClick = {
+                    // Validación
+                    var hayErrores = false
+                    if (!NifValidator.esValido(nif.trim())) {
+                        errorNif = "NIF/CIF/NIE no válido"
+                        hayErrores = true
+                    }
+                    if (!NifValidator.esEmailValido(email.trim())) {
+                        errorEmail = "Email no válido"
+                        hayErrores = true
+                    }
+                    if (hayErrores) return@Button
+
                     val nuevoCliente = (cliente ?: Cliente()).copy(
                         nombre = nombre.trim(),
                         nif = nif.trim(),

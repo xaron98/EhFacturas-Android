@@ -236,6 +236,7 @@ private fun GastoFormDialog(
     var observaciones by remember { mutableStateOf(gasto?.observaciones ?: "") }
     var deducibleIVA by remember { mutableStateOf(gasto?.deducibleIVA ?: true) }
     var expandedCategoria by remember { mutableStateOf(false) }
+    var errorConcepto by remember { mutableStateOf("") }
 
     AlertDialog(
         onDismissRequest = onCerrar,
@@ -247,10 +248,14 @@ private fun GastoFormDialog(
                 item {
                     OutlinedTextField(
                         value = concepto,
-                        onValueChange = { concepto = it },
+                        onValueChange = { concepto = it; errorConcepto = "" },
                         label = { Text("Concepto *") },
                         modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
+                        singleLine = true,
+                        isError = errorConcepto.isNotEmpty(),
+                        supportingText = if (errorConcepto.isNotEmpty()) {
+                            { Text(errorConcepto) }
+                        } else null
                     )
                 }
                 item {
@@ -324,6 +329,12 @@ private fun GastoFormDialog(
         confirmButton = {
             Button(
                 onClick = {
+                    // Validación
+                    if (concepto.isBlank()) {
+                        errorConcepto = "Concepto requerido"
+                        return@Button
+                    }
+
                     val importe = importeTexto.replace(",", ".").toDoubleOrNull() ?: 0.0
                     val nuevoGasto = (gasto ?: Gasto()).copy(
                         concepto = concepto.trim(),
@@ -335,7 +346,7 @@ private fun GastoFormDialog(
                     )
                     onGuardar(nuevoGasto)
                 },
-                enabled = concepto.isNotBlank()
+                enabled = true
             ) {
                 Text("Guardar")
             }

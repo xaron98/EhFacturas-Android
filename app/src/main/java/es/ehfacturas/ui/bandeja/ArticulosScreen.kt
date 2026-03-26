@@ -189,6 +189,7 @@ private fun ArticuloFormDialog(
     var tipoIVA by remember { mutableStateOf(articulo?.tipoIVA ?: TipoIVA.GENERAL) }
     var expandedUnidad by remember { mutableStateOf(false) }
     var expandedIVA by remember { mutableStateOf(false) }
+    var errorNombre by remember { mutableStateOf("") }
 
     AlertDialog(
         onDismissRequest = onCerrar,
@@ -200,10 +201,14 @@ private fun ArticuloFormDialog(
                 item {
                     OutlinedTextField(
                         value = nombre,
-                        onValueChange = { nombre = it },
+                        onValueChange = { nombre = it; errorNombre = "" },
                         label = { Text("Nombre *") },
                         modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
+                        singleLine = true,
+                        isError = errorNombre.isNotEmpty(),
+                        supportingText = if (errorNombre.isNotEmpty()) {
+                            { Text(errorNombre) }
+                        } else null
                     )
                 }
                 item {
@@ -293,6 +298,12 @@ private fun ArticuloFormDialog(
         confirmButton = {
             Button(
                 onClick = {
+                    // Validación
+                    if (nombre.isBlank()) {
+                        errorNombre = "Nombre requerido"
+                        return@Button
+                    }
+
                     val precio = precioTexto.replace(",", ".").toDoubleOrNull() ?: 0.0
                     val nuevoArticulo = (articulo ?: Articulo()).copy(
                         nombre = nombre.trim(),
@@ -304,7 +315,7 @@ private fun ArticuloFormDialog(
                     )
                     onGuardar(nuevoArticulo)
                 },
-                enabled = nombre.isNotBlank()
+                enabled = true
             ) {
                 Text("Guardar")
             }
