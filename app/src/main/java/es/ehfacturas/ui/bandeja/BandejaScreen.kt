@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 fun BandejaScreen(
     onNavigateBack: () -> Unit,
     onNavigateToFactura: (Long) -> Unit = {},
-    onNavigateToNuevaFactura: () -> Unit = {}
+    onNavigateToNuevaFactura: () -> Unit = {},
+    onNavigateToAjustes: () -> Unit = {}
 ) {
     var tabSeleccionada by remember { mutableIntStateOf(0) }
     val tabs = listOf("Facturas", "Clientes", "Artículos", "Gastos", "Informes")
@@ -37,7 +38,7 @@ fun BandejaScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* TODO: ajustes */ }) {
+                    IconButton(onClick = onNavigateToAjustes) {
                         Icon(Icons.Default.Settings, contentDescription = "Ajustes")
                     }
                 }

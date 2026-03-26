@@ -18,6 +18,9 @@ interface ClienteDao {
     @Query("SELECT * FROM clientes WHERE nombre LIKE '%' || :texto || '%' OR nif LIKE '%' || :texto || '%'")
     suspend fun buscar(texto: String): List<Cliente>
 
+    @Query("SELECT * FROM clientes WHERE activo = 1")
+    suspend fun obtenerTodosSync(): List<Cliente>
+
     @Query("SELECT COUNT(*) FROM clientes WHERE activo = 1")
     fun contarActivos(): Flow<Int>
 

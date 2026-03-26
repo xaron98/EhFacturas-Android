@@ -18,6 +18,9 @@ interface ArticuloDao {
     @Query("SELECT * FROM articulos WHERE activo = 1 AND (nombre LIKE '%' || :texto || '%' OR referencia LIKE '%' || :texto || '%' OR descripcion LIKE '%' || :texto || '%')")
     suspend fun buscar(texto: String): List<Articulo>
 
+    @Query("SELECT * FROM articulos WHERE activo = 1")
+    suspend fun obtenerTodosSync(): List<Articulo>
+
     @Query("SELECT COUNT(*) FROM articulos WHERE activo = 1")
     fun contarActivos(): Flow<Int>
 

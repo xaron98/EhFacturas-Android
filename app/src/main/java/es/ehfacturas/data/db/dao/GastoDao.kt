@@ -27,6 +27,9 @@ interface GastoDao {
     @Query("SELECT COALESCE(SUM(importe), 0) FROM gastos WHERE fecha BETWEEN :desde AND :hasta")
     fun totalPeriodo(desde: Date, hasta: Date): Flow<Double>
 
+    @Query("SELECT * FROM gastos")
+    suspend fun obtenerTodosSync(): List<Gasto>
+
     @Query("SELECT COUNT(*) FROM gastos")
     fun contarTodos(): Flow<Int>
 

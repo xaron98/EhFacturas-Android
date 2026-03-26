@@ -21,6 +21,8 @@ class ArticuloRepository @Inject constructor(
 
     suspend fun buscar(texto: String): List<Articulo> = articuloDao.buscar(texto)
 
+    suspend fun obtenerTodosSync(): List<Articulo> = articuloDao.obtenerTodosSync()
+
     fun contarActivos(): Flow<Int> = articuloDao.contarActivos()
 
     suspend fun guardar(articulo: Articulo): Long = articuloDao.insertar(articulo)

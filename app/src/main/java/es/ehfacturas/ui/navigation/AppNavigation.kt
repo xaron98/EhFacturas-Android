@@ -10,6 +10,7 @@ import es.ehfacturas.ui.bandeja.BandejaScreen
 import es.ehfacturas.ui.factura.FacturaDetalleScreen
 import es.ehfacturas.ui.factura.FacturaEditScreen
 import es.ehfacturas.ui.main.MainScreen
+import es.ehfacturas.ui.settings.AjustesScreen
 
 // Rutas de navegación
 object Rutas {
@@ -53,7 +54,8 @@ fun AppNavigation(navController: NavHostController) {
                 },
                 onNavigateToNuevaFactura = {
                     navController.navigate(Rutas.FACTURA_NUEVA)
-                }
+                },
+                onNavigateToAjustes = { navController.navigate(Rutas.AJUSTES) }
             )
         }
         composable(Rutas.FACTURA_NUEVA) {
@@ -82,6 +84,11 @@ fun AppNavigation(navController: NavHostController) {
             arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
         ) {
             FacturaEditScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.AJUSTES) {
+            AjustesScreen(
                 onBack = { navController.popBackStack() }
             )
         }

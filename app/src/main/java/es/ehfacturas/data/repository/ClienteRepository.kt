@@ -18,6 +18,8 @@ class ClienteRepository @Inject constructor(
 
     suspend fun buscar(texto: String): List<Cliente> = clienteDao.buscar(texto)
 
+    suspend fun obtenerTodosSync(): List<Cliente> = clienteDao.obtenerTodosSync()
+
     fun contarActivos(): Flow<Int> = clienteDao.contarActivos()
 
     suspend fun guardar(cliente: Cliente): Long = clienteDao.insertar(cliente)

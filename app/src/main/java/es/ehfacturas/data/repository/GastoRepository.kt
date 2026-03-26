@@ -22,6 +22,8 @@ class GastoRepository @Inject constructor(
 
     fun totalPeriodo(desde: Date, hasta: Date): Flow<Double> = gastoDao.totalPeriodo(desde, hasta)
 
+    suspend fun obtenerTodosSync(): List<Gasto> = gastoDao.obtenerTodosSync()
+
     fun contarTodos(): Flow<Int> = gastoDao.contarTodos()
 
     suspend fun gastosPorCategoria(desde: Date, hasta: Date): List<CategoriaTotal> = gastoDao.gastosPorCategoria(desde, hasta)
