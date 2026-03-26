@@ -9,7 +9,11 @@ import androidx.navigation.navArgument
 import es.ehfacturas.ui.bandeja.BandejaScreen
 import es.ehfacturas.ui.factura.FacturaDetalleScreen
 import es.ehfacturas.ui.factura.FacturaEditScreen
+import es.ehfacturas.ui.importador.ImportadorScreen
 import es.ehfacturas.ui.main.MainScreen
+import es.ehfacturas.ui.plantillas.PlantillasScreen
+import es.ehfacturas.ui.recurrentes.RecurrentesScreen
+import es.ehfacturas.ui.scanner.ScannerScreen
 import es.ehfacturas.ui.settings.AjustesScreen
 
 // Rutas de navegación
@@ -26,6 +30,8 @@ object Rutas {
     const val AJUSTES = "ajustes"
     const val IMPORTAR = "importar"
     const val SCANNER = "scanner"
+    const val RECURRENTES = "recurrentes"
+    const val PLANTILLAS = "plantillas"
     const val SUSCRIPCION = "suscripcion"
 
     fun facturaDetalle(facturaId: Long) = "factura/$facturaId"
@@ -55,7 +61,8 @@ fun AppNavigation(navController: NavHostController) {
                 onNavigateToNuevaFactura = {
                     navController.navigate(Rutas.FACTURA_NUEVA)
                 },
-                onNavigateToAjustes = { navController.navigate(Rutas.AJUSTES) }
+                onNavigateToAjustes = { navController.navigate(Rutas.AJUSTES) },
+                onNavigateToImportar = { navController.navigate(Rutas.IMPORTAR) }
             )
         }
         composable(Rutas.FACTURA_NUEVA) {
@@ -76,7 +83,9 @@ fun AppNavigation(navController: NavHostController) {
                     navController.navigate(Rutas.facturaDetalle(facturaId)) {
                         popUpTo(Rutas.BANDEJA)
                     }
-                }
+                },
+                onNavigateToRecurrentes = { navController.navigate(Rutas.RECURRENTES) },
+                onNavigateToPlantillas = { navController.navigate(Rutas.PLANTILLAS) }
             )
         }
         composable(
@@ -89,6 +98,30 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable(Rutas.AJUSTES) {
             AjustesScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.IMPORTAR) {
+            ImportadorScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.SCANNER) {
+            ScannerScreen(
+                onBack = { navController.popBackStack() },
+                onTextoEscaneado = { texto ->
+                    // Volver a la pantalla anterior con el texto escaneado
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable(Rutas.RECURRENTES) {
+            RecurrentesScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.PLANTILLAS) {
+            PlantillasScreen(
                 onBack = { navController.popBackStack() }
             )
         }

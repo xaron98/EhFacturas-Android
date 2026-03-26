@@ -16,7 +16,8 @@ fun BandejaScreen(
     onNavigateBack: () -> Unit,
     onNavigateToFactura: (Long) -> Unit = {},
     onNavigateToNuevaFactura: () -> Unit = {},
-    onNavigateToAjustes: () -> Unit = {}
+    onNavigateToAjustes: () -> Unit = {},
+    onNavigateToImportar: () -> Unit = {}
 ) {
     var tabSeleccionada by remember { mutableIntStateOf(0) }
     val tabs = listOf("Facturas", "Clientes", "Artículos", "Gastos", "Informes")
@@ -38,6 +39,9 @@ fun BandejaScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = onNavigateToImportar) {
+                        Icon(Icons.Default.UploadFile, contentDescription = "Importar")
+                    }
                     IconButton(onClick = onNavigateToAjustes) {
                         Icon(Icons.Default.Settings, contentDescription = "Ajustes")
                     }

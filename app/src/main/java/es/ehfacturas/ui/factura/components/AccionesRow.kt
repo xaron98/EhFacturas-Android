@@ -24,6 +24,10 @@ fun AccionesRow(
     onDuplicar: () -> Unit,
     onConvertir: () -> Unit,
     onPdf: () -> Unit,
+    onFotos: () -> Unit = {},
+    onFirma: () -> Unit = {},
+    onRecurrente: () -> Unit = {},
+    onPlantilla: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -57,6 +61,18 @@ fun AccionesRow(
 
         // Duplicar siempre
         AccionButton("Duplicar", Icons.Default.ContentCopy, onClick = onDuplicar)
+
+        // Fotos adjuntas
+        AccionButton("Fotos", Icons.Default.PhotoCamera, onClick = onFotos)
+
+        // Firma del cliente
+        AccionButton("Firma", Icons.Default.Draw, onClick = onFirma)
+
+        // Crear recurrente desde esta factura
+        AccionButton("Recurrente", Icons.Default.EventRepeat, onClick = onRecurrente)
+
+        // Guardar como plantilla
+        AccionButton("Plantilla", Icons.Default.Description, onClick = onPlantilla)
 
         // Anular solo emitida/pagada
         if (estado == EstadoFactura.EMITIDA || estado == EstadoFactura.PAGADA) {

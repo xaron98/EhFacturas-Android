@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,8 +20,10 @@ import java.util.Locale
 
 private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES"))
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlantillasScreen(
+    onBack: () -> Unit = {},
     viewModel: PlantillasViewModel = hiltViewModel()
 ) {
     val plantillas by viewModel.plantillas.collectAsStateWithLifecycle()
@@ -36,6 +39,16 @@ fun PlantillasScreen(
     }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Plantillas") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver")
+                    }
+                }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         if (plantillas.isEmpty()) {

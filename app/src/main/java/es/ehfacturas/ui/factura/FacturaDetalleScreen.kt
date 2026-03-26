@@ -20,6 +20,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import es.ehfacturas.data.db.entity.EstadoFactura
 import es.ehfacturas.domain.validation.Formateadores
 import es.ehfacturas.ui.factura.components.AccionesRow
+import es.ehfacturas.ui.factura.components.FirmaDialog
+import es.ehfacturas.ui.factura.components.FotosFacturaSheet
 import es.ehfacturas.ui.factura.components.TotalesSection
 import java.io.File
 import java.text.SimpleDateFormat
@@ -34,10 +36,16 @@ fun FacturaDetalleScreen(
     onBack: () -> Unit,
     onEdit: (Long) -> Unit,
     onNavigateToFactura: (Long) -> Unit,
+    onNavigateToRecurrentes: () -> Unit = {},
+    onNavigateToPlantillas: () -> Unit = {},
     viewModel: FacturaDetalleViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    // Estado para mostrar fotos y firma
+    var mostrarFotos by remember { mutableStateOf(false) }
+    var mostrarFirma by remember { mutableStateOf(false) }
 
     // Mensaje snackbar
     LaunchedEffect(uiState.mensaje) {
@@ -140,7 +148,11 @@ fun FacturaDetalleScreen(
                 onAnular = { viewModel.anular() },
                 onDuplicar = { viewModel.duplicar() },
                 onConvertir = { viewModel.convertirEnFactura() },
-                onPdf = { viewModel.generarYCompartirPdf() }
+                onPdf = { viewModel.generarYCompartirPdf() },
+                onFotos = { mostrarFotos = true },
+                onFirma = { mostrarFirma = true },
+                onRecurrente = onNavigateToRecurrentes,
+                onPlantilla = onNavigateToPlantillas
             )
 
             HorizontalDivider()
@@ -243,6 +255,29 @@ fun FacturaDetalleScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
         }
+    }
+
+    // Sheet de fotos adjuntas
+    if (mostrarFotos && factura != null) {
+        FotosFacturaSheet(
+            facturaId = factura.id,
+            fotosRutas = emptyList(), // TODO: cargar fotos desde repositorio
+            onFotosChange = { /* TODO: guardar fotos en repositorio */ },
+            onDismiss = { mostrarFotos = false }
+        )
+    }
+
+    // Diálogo de firma del cliente
+    if (mostrarFirma && factura != null) {
+        FirmaDialog(
+            firmaExistente = factura.firmaClienteRuta,
+            onGuardar = { ruta ->
+                // TODO: guardar ruta de firma en factura via viewModel
+                mostrarFirma = false
+            },
+            onDismiss = { mostrarFirma = false },
+            directorio = context.filesDir
+        )
     }
 }
 
