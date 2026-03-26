@@ -9,6 +9,7 @@ import es.ehfacturas.data.db.entity.*
 import es.ehfacturas.data.repository.FacturaRepository
 import es.ehfacturas.data.repository.NegocioRepository
 import es.ehfacturas.data.repository.VeriFactuRepository
+import es.ehfacturas.domain.pdf.FacturaPdfGenerator
 import es.ehfacturas.domain.validation.RecalculoTotales
 import es.ehfacturas.domain.validation.TotalesFactura
 import kotlinx.coroutines.flow.*
@@ -36,7 +37,8 @@ class FacturaDetalleViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val facturaRepository: FacturaRepository,
     private val negocioRepository: NegocioRepository,
-    private val veriFactuRepository: VeriFactuRepository
+    private val veriFactuRepository: VeriFactuRepository,
+    private val pdfGenerator: FacturaPdfGenerator
 ) : ViewModel() {
 
     private val facturaId: Long = savedStateHandle.get<String>("facturaId")?.toLong() ?: 0L
@@ -156,6 +158,19 @@ class FacturaDetalleViewModel @Inject constructor(
             facturaRepository.guardarLineas(nuevasLineas)
             negocioRepository.incrementarNumeroFactura(negocio.id)
             _uiState.update { it.copy(facturaIdNueva = nuevoId, mensaje = "Factura duplicada") }
+        }
+    }
+
+    fun generarPdf() {
+        viewModelScope.launch {
+            val state = _uiState.value
+            val factura = state.factura ?: return@launch
+            val registro = state.registros.firstOrNull()
+
+            val archivo = pdfGenerator.generar(factura, state.lineas, registro)
+            val facturaConPdf = factura.copy(pdfRuta = archivo.absolutePath)
+            facturaRepository.actualizar(facturaConPdf)
+            _uiState.update { it.copy(factura = facturaConPdf, mensaje = "PDF generado") }
         }
     }
 
