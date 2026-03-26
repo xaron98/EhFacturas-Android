@@ -196,15 +196,16 @@ class SpeechService @Inject constructor(
             when (error) {
                 SpeechRecognizer.ERROR_NO_MATCH,
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> {
-                    // Silencio o timeout: reiniciar transparentemente si estamos en modo continuo
                     if (escuchaContinuaActiva) {
+                        // Reiniciar transparentemente
                         reiniciarTimerSilencio()
                         reiniciarEscuchaTransparente()
-                        return
                     }
+                    // Si no está activa, silenciar — no es un error real
+                    return
                 }
                 SpeechRecognizer.ERROR_CLIENT -> {
-                    // Usuario canceló, no hacer nada
+                    // Usuario canceló
                     return
                 }
             }
