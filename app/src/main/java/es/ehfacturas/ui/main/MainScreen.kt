@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(
     onNavigateToBandeja: () -> Unit,
+    onNavigateToFactura: (Long) -> Unit = {},
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val mensajes by viewModel.mensajes.collectAsStateWithLifecycle()

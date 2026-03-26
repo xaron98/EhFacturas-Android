@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BandejaScreen(
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToFactura: (Long) -> Unit = {},
+    onNavigateToNuevaFactura: () -> Unit = {}
 ) {
     var tabSeleccionada by remember { mutableIntStateOf(0) }
     val tabs = listOf("Facturas", "Clientes", "Artículos", "Gastos", "Informes")
@@ -63,7 +65,10 @@ fun BandejaScreen(
 
             // Contenido según tab
             when (tabSeleccionada) {
-                0 -> FacturasScreen()
+                0 -> FacturasScreen(
+                    onFacturaClick = onNavigateToFactura,
+                    onNuevaFactura = onNavigateToNuevaFactura
+                )
                 1 -> ClientesScreen()
                 2 -> ArticulosScreen()
                 3 -> GastosScreen()

@@ -2,10 +2,14 @@ package es.ehfacturas.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import es.ehfacturas.ui.main.MainScreen
+import androidx.navigation.navArgument
 import es.ehfacturas.ui.bandeja.BandejaScreen
+import es.ehfacturas.ui.factura.FacturaDetalleScreen
+import es.ehfacturas.ui.factura.FacturaEditScreen
+import es.ehfacturas.ui.main.MainScreen
 
 // Rutas de navegación
 object Rutas {
@@ -35,12 +39,50 @@ fun AppNavigation(navController: NavHostController) {
     ) {
         composable(Rutas.MAIN) {
             MainScreen(
-                onNavigateToBandeja = { navController.navigate(Rutas.BANDEJA) }
+                onNavigateToBandeja = { navController.navigate(Rutas.BANDEJA) },
+                onNavigateToFactura = { facturaId ->
+                    navController.navigate(Rutas.facturaDetalle(facturaId))
+                }
             )
         }
         composable(Rutas.BANDEJA) {
             BandejaScreen(
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToFactura = { facturaId ->
+                    navController.navigate(Rutas.facturaDetalle(facturaId))
+                },
+                onNavigateToNuevaFactura = {
+                    navController.navigate(Rutas.FACTURA_NUEVA)
+                }
+            )
+        }
+        composable(Rutas.FACTURA_NUEVA) {
+            FacturaEditScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(
+            route = Rutas.FACTURA_DETALLE,
+            arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
+        ) {
+            FacturaDetalleScreen(
+                onBack = { navController.popBackStack() },
+                onEdit = { facturaId ->
+                    navController.navigate(Rutas.facturaEdit(facturaId))
+                },
+                onNavigateToFactura = { facturaId ->
+                    navController.navigate(Rutas.facturaDetalle(facturaId)) {
+                        popUpTo(Rutas.BANDEJA)
+                    }
+                }
+            )
+        }
+        composable(
+            route = Rutas.FACTURA_EDIT,
+            arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
+        ) {
+            FacturaEditScreen(
+                onBack = { navController.popBackStack() }
             )
         }
     }

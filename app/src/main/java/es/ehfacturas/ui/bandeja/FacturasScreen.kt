@@ -27,6 +27,8 @@ private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES"))
 
 @Composable
 fun FacturasScreen(
+    onFacturaClick: (Long) -> Unit = {},
+    onNuevaFactura: () -> Unit = {},
     viewModel: FacturasViewModel = hiltViewModel()
 ) {
     val facturasFiltradas by viewModel.facturasFiltradas.collectAsStateWithLifecycle()
@@ -35,91 +37,105 @@ fun FacturasScreen(
     val totalFacturas by viewModel.totalFacturas.collectAsStateWithLifecycle()
     val pendientes by viewModel.pendientes.collectAsStateWithLifecycle()
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Dashboard cards
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                StatCard(
-                    titulo = "Este mes",
-                    valor = formatoMoneda.format(facturacionMes),
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.weight(1f)
-                )
-                StatCard(
-                    titulo = "Total",
-                    valor = "$totalFacturas",
-                    color = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.weight(1f)
-                )
-                StatCard(
-                    titulo = "Pendientes",
-                    valor = "$pendientes",
-                    color = MaterialTheme.colorScheme.tertiary,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-
-        // Filtros por estado
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                FilterChip(
-                    selected = filtroEstado == null,
-                    onClick = { viewModel.filtrarPorEstado(null) },
-                    label = { Text("Todas") }
-                )
-                EstadoFactura.entries.forEach { estado ->
-                    FilterChip(
-                        selected = filtroEstado == estado,
-                        onClick = { viewModel.filtrarPorEstado(estado) },
-                        label = { Text(estado.descripcion) }
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Dashboard cards
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    StatCard(
+                        titulo = "Este mes",
+                        valor = formatoMoneda.format(facturacionMes),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.weight(1f)
+                    )
+                    StatCard(
+                        titulo = "Total",
+                        valor = "$totalFacturas",
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.weight(1f)
+                    )
+                    StatCard(
+                        titulo = "Pendientes",
+                        valor = "$pendientes",
+                        color = MaterialTheme.colorScheme.tertiary,
+                        modifier = Modifier.weight(1f)
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
-        }
 
-        if (facturasFiltradas.isEmpty()) {
+            // Filtros por estado
             item {
-                Box(
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 48.dp),
-                    contentAlignment = Alignment.Center
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(
-                            Icons.Default.Receipt,
-                            contentDescription = null,
-                            modifier = Modifier.size(64.dp),
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            "Sin facturas",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                    FilterChip(
+                        selected = filtroEstado == null,
+                        onClick = { viewModel.filtrarPorEstado(null) },
+                        label = { Text("Todas") }
+                    )
+                    EstadoFactura.entries.forEach { estado ->
+                        FilterChip(
+                            selected = filtroEstado == estado,
+                            onClick = { viewModel.filtrarPorEstado(estado) },
+                            label = { Text(estado.descripcion) }
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(8.dp))
             }
-        } else {
-            items(facturasFiltradas, key = { it.id }) { factura ->
-                FacturaCard(factura = factura)
+
+            if (facturasFiltradas.isEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 48.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(
+                                Icons.Default.Receipt,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                "Sin facturas",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            } else {
+                items(facturasFiltradas, key = { it.id }) { factura ->
+                    FacturaCard(
+                        factura = factura,
+                        onClick = { onFacturaClick(factura.id) }
+                    )
+                }
             }
+        }
+
+        FloatingActionButton(
+            onClick = onNuevaFactura,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        ) {
+            Icon(Icons.Default.Add, contentDescription = "Nueva factura")
         }
     }
 }
@@ -156,7 +172,7 @@ private fun StatCard(
 }
 
 @Composable
-private fun FacturaCard(factura: Factura) {
+private fun FacturaCard(factura: Factura, onClick: () -> Unit) {
     val colorEstado = when (factura.estado) {
         EstadoFactura.PRESUPUESTO -> Color(0xFF9333EA)
         EstadoFactura.BORRADOR -> Color(0xFF6B7280)
@@ -166,7 +182,7 @@ private fun FacturaCard(factura: Factura) {
         EstadoFactura.ANULADA -> Color(0xFFEA580C)
     }
 
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
