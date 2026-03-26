@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EhFacturas!</string>
+
+    <!-- Navigation -->
+    <string name="facturas">Invoices</string>
+    <string name="clientes">Clients</string>
+    <string name="articulos">Items</string>
+    <string name="gastos">Expenses</string>
+    <string name="informes">Reports</string>
+    <string name="ajustes">Settings</string>
+    <string name="importar">Import</string>
+    <string name="escaner">Scanner</string>
+
+    <!-- Actions -->
+    <string name="guardar">Save</string>
+    <string name="cancelar">Cancel</string>
+    <string name="eliminar">Delete</string>
+    <string name="editar">Edit</string>
+    <string name="enviar">Send</string>
+    <string name="buscar">Search</string>
+    <string name="volver">Back</string>
+    <string name="aceptar">Accept</string>
+    <string name="nuevo">New</string>
+    <string name="duplicar">Duplicate</string>
+    <string name="compartir">Share</string>
+    <string name="exportar">Export</string>
+
+    <!-- Invoice -->
+    <string name="nueva_factura">New invoice</string>
+    <string name="emitir">Issue</string>
+    <string name="cobrar">Mark as paid</string>
+    <string name="anular">Void</string>
+    <string name="convertir">Convert to invoice</string>
+    <string name="presupuesto">Quote</string>
+    <string name="borrador">Draft</string>
+    <string name="emitida">Issued</string>
+    <string name="pagada">Paid</string>
+    <string name="vencida">Overdue</string>
+    <string name="anulada">Voided</string>
+    <string name="lineas">Invoice lines</string>
+    <string name="anadir_linea">Add line</string>
+    <string name="desde_articulo">From item</string>
+    <string name="totales">Totals</string>
+    <string name="base_imponible">Subtotal</string>
+    <string name="descuento">Discount</string>
+    <string name="total">Total</string>
+    <string name="observaciones">Notes</string>
+    <string name="notas_internas">Internal notes</string>
+    <string name="fecha">Date</string>
+    <string name="vencimiento">Due date</string>
+    <string name="numero_factura">Invoice number</string>
+
+    <!-- Client -->
+    <string name="nuevo_cliente">New client</string>
+    <string name="nombre">Name</string>
+    <string name="nif">Tax ID</string>
+    <string name="email">Email</string>
+    <string name="telefono">Phone</string>
+    <string name="direccion">Address</string>
+    <string name="codigo_postal">Postal code</string>
+    <string name="ciudad">City</string>
+    <string name="provincia">Region</string>
+
+    <!-- Article -->
+    <string name="nuevo_articulo">New item</string>
+    <string name="referencia">Reference</string>
+    <string name="precio">Price</string>
+    <string name="unidad">Unit</string>
+    <string name="categoria">Category</string>
+
+    <!-- Expense -->
+    <string name="nuevo_gasto">New expense</string>
+    <string name="concepto">Description</string>
+    <string name="importe">Amount</string>
+    <string name="proveedor">Supplier</string>
+
+    <!-- Reports -->
+    <string name="este_mes">This month</string>
+    <string name="trimestre">Quarter</string>
+    <string name="este_ano">This year</string>
+    <string name="todo">All</string>
+    <string name="facturado">Invoiced</string>
+    <string name="cobrado">Collected</string>
+    <string name="pendiente">Pending</string>
+    <string name="iva_repercutido">Output VAT</string>
+    <string name="irpf_retenido">Income tax withheld</string>
+    <string name="beneficio_neto">Net profit</string>
+    <string name="beneficio_real">Real profit</string>
+    <string name="top_clientes">Top clients</string>
+    <string name="gastos_por_categoria">Expenses by category</string>
+    <string name="exportar_csv">Export invoices (CSV)</string>
+
+    <!-- Settings -->
+    <string name="identidad_fiscal">Tax identity</string>
+    <string name="contacto">Contact</string>
+    <string name="impuestos">Taxes</string>
+    <string name="numeracion">Invoice numbering</string>
+    <string name="condiciones_pago">Payment terms</string>
+    <string name="apariencia">Appearance</string>
+    <string name="inteligencia_artificial">Artificial Intelligence</string>
+    <string name="copia_seguridad">Backup</string>
+    <string name="acerca_de">About</string>
+    <string name="aplicar_irpf">Apply income tax withholding</string>
+    <string name="exportar_json">Export data (JSON)</string>
+
+    <!-- Features -->
+    <string name="fotos">Photos</string>
+    <string name="firma">Signature</string>
+    <string name="plantillas">Templates</string>
+    <string name="recurrentes">Recurring</string>
+    <string name="pdf">PDF</string>
+
+    <!-- Scanner -->
+    <string name="usar_texto">Use this text</string>
+    <string name="permiso_camara">Camera permission required</string>
+
+    <!-- Empty states -->
+    <string name="sin_facturas">No invoices</string>
+    <string name="sin_clientes">No clients</string>
+    <string name="sin_articulos">No items</string>
+    <string name="sin_gastos">No expenses</string>
+
+    <!-- Errors -->
+    <string name="nombre_requerido">Name required</string>
+    <string name="concepto_requerido">Description required</string>
+    <string name="nif_invalido">Invalid Tax ID</string>
+    <string name="email_invalido">Invalid email</string>
+
+    <!-- Notifications -->
+    <string name="factura_por_vencer">Invoice due soon</string>
+    <string name="factura_vence_hoy">Invoice due today</string>
+
+    <!-- Misc -->
+    <string name="configurar_ia">Configure AI</string>
+    <string name="sin_proveedor_ia">No AI provider available. Configure your API key in Settings.</string>
+    <string name="limpiar">Clear</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EhFacturas!</string>
+
+    <!-- Navigation -->
+    <string name="facturas">Facturas</string>
+    <string name="clientes">Clientes</string>
+    <string name="articulos">Artigos</string>
+    <string name="gastos">Gastos</string>
+    <string name="informes">Informes</string>
+    <string name="ajustes">Axustes</string>
+    <string name="importar">Importar</string>
+    <string name="escaner">Escáner</string>
+
+    <!-- Actions -->
+    <string name="guardar">Gardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="enviar">Enviar</string>
+    <string name="buscar">Buscar</string>
+    <string name="volver">Volver</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="nuevo">Novo</string>
+    <string name="duplicar">Duplicar</string>
+    <string name="compartir">Compartir</string>
+    <string name="exportar">Exportar</string>
+
+    <!-- Invoice -->
+    <string name="nueva_factura">Nova factura</string>
+    <string name="emitir">Emitir</string>
+    <string name="cobrar">Cobrar</string>
+    <string name="anular">Anular</string>
+    <string name="convertir">Converter en factura</string>
+    <string name="presupuesto">Orzamento</string>
+    <string name="borrador">Borrador</string>
+    <string name="emitida">Emitida</string>
+    <string name="pagada">Pagada</string>
+    <string name="vencida">Vencida</string>
+    <string name="anulada">Anulada</string>
+    <string name="lineas">Liñas de factura</string>
+    <string name="anadir_linea">Engadir liña</string>
+    <string name="desde_articulo">Desde artigo</string>
+    <string name="totales">Totais</string>
+    <string name="base_imponible">Base impoñible</string>
+    <string name="descuento">Desconto</string>
+    <string name="total">Total</string>
+    <string name="observaciones">Observacións</string>
+    <string name="notas_internas">Notas internas</string>
+    <string name="fecha">Data</string>
+    <string name="vencimiento">Vencemento</string>
+    <string name="numero_factura">Número de factura</string>
+
+    <!-- Client -->
+    <string name="nuevo_cliente">Novo cliente</string>
+    <string name="nombre">Nome</string>
+    <string name="nif">NIF / CIF</string>
+    <string name="email">Correo electrónico</string>
+    <string name="telefono">Teléfono</string>
+    <string name="direccion">Enderezo</string>
+    <string name="codigo_postal">Código postal</string>
+    <string name="ciudad">Cidade</string>
+    <string name="provincia">Provincia</string>
+
+    <!-- Article -->
+    <string name="nuevo_articulo">Novo artigo</string>
+    <string name="referencia">Referencia</string>
+    <string name="precio">Prezo</string>
+    <string name="unidad">Unidade</string>
+    <string name="categoria">Categoría</string>
+
+    <!-- Expense -->
+    <string name="nuevo_gasto">Novo gasto</string>
+    <string name="concepto">Concepto</string>
+    <string name="importe">Importe</string>
+    <string name="proveedor">Provedor</string>
+
+    <!-- Empty states -->
+    <string name="sin_facturas">Sen facturas</string>
+    <string name="sin_clientes">Sen clientes</string>
+    <string name="sin_articulos">Sen artigos</string>
+    <string name="sin_gastos">Sen gastos</string>
+
+    <!-- Errors -->
+    <string name="nombre_requerido">Nome obrigatorio</string>
+    <string name="concepto_requerido">Concepto obrigatorio</string>
+    <string name="nif_invalido">NIF/CIF/NIE non válido</string>
+    <string name="email_invalido">Correo electrónico non válido</string>
+
+    <!-- Notifications -->
+    <string name="factura_por_vencer">Factura por vencer</string>
+    <string name="factura_vence_hoy">Factura vence hoxe</string>
+
+    <!-- Misc -->
+    <string name="configurar_ia">Configurar IA</string>
+    <string name="sin_proveedor_ia">Non hai provedor de IA dispoñible. Configura a túa clave API en Axustes.</string>
+    <string name="limpiar">Limpar</string>
+</resources>

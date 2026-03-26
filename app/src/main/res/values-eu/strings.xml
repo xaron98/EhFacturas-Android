@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EhFacturas!</string>
+
+    <!-- Navigation -->
+    <string name="facturas">Fakturak</string>
+    <string name="clientes">Bezeroak</string>
+    <string name="articulos">Artikuluak</string>
+    <string name="gastos">Gastuak</string>
+    <string name="informes">Txostenak</string>
+    <string name="ajustes">Ezarpenak</string>
+    <string name="importar">Inportatu</string>
+    <string name="escaner">Eskaner</string>
+
+    <!-- Actions -->
+    <string name="guardar">Gorde</string>
+    <string name="cancelar">Utzi</string>
+    <string name="eliminar">Ezabatu</string>
+    <string name="editar">Editatu</string>
+    <string name="enviar">Bidali</string>
+    <string name="buscar">Bilatu</string>
+    <string name="volver">Atzera</string>
+    <string name="aceptar">Onartu</string>
+    <string name="nuevo">Berria</string>
+    <string name="duplicar">Bikoiztu</string>
+    <string name="compartir">Partekatu</string>
+    <string name="exportar">Esportatu</string>
+
+    <!-- Invoice -->
+    <string name="nueva_factura">Faktura berria</string>
+    <string name="emitir">Igorri</string>
+    <string name="cobrar">Kobratu</string>
+    <string name="anular">Baliogabetu</string>
+    <string name="convertir">Faktura bihurtu</string>
+    <string name="presupuesto">Aurrekontua</string>
+    <string name="borrador">Zirriborroa</string>
+    <string name="emitida">Igorriak</string>
+    <string name="pagada">Ordaindua</string>
+    <string name="vencida">Iraungita</string>
+    <string name="anulada">Baliogabetua</string>
+    <string name="lineas">Faktura lerroak</string>
+    <string name="anadir_linea">Lerroa gehitu</string>
+    <string name="desde_articulo">Artikulutik</string>
+    <string name="totales">Guztira</string>
+    <string name="base_imponible">Oinarri ezargarria</string>
+    <string name="descuento">Deskontua</string>
+    <string name="total">Guztira</string>
+    <string name="observaciones">Oharrak</string>
+    <string name="notas_internas">Barne oharrak</string>
+    <string name="fecha">Data</string>
+    <string name="vencimiento">Muga-eguna</string>
+    <string name="numero_factura">Faktura zenbakia</string>
+
+    <!-- Client -->
+    <string name="nuevo_cliente">Bezero berria</string>
+    <string name="nombre">Izena</string>
+    <string name="nif">IFZ / EIZ</string>
+    <string name="email">Helbide elektronikoa</string>
+    <string name="telefono">Telefonoa</string>
+    <string name="direccion">Helbidea</string>
+    <string name="codigo_postal">Posta kodea</string>
+    <string name="ciudad">Hiria</string>
+    <string name="provincia">Probintzia</string>
+
+    <!-- Article -->
+    <string name="nuevo_articulo">Artikulu berria</string>
+    <string name="referencia">Erreferentzia</string>
+    <string name="precio">Prezioa</string>
+    <string name="unidad">Unitatea</string>
+    <string name="categoria">Kategoria</string>
+
+    <!-- Expense -->
+    <string name="nuevo_gasto">Gastu berria</string>
+    <string name="concepto">Kontzeptua</string>
+    <string name="importe">Zenbatekoa</string>
+    <string name="proveedor">Hornitzailea</string>
+
+    <!-- Empty states -->
+    <string name="sin_facturas">Faktura gabe</string>
+    <string name="sin_clientes">Bezero gabe</string>
+    <string name="sin_articulos">Artikulu gabe</string>
+    <string name="sin_gastos">Gastu gabe</string>
+
+    <!-- Errors -->
+    <string name="nombre_requerido">Izena beharrezkoa da</string>
+    <string name="concepto_requerido">Kontzeptua beharrezkoa da</string>
+    <string name="nif_invalido">IFZ/EIZ baliogabea</string>
+    <string name="email_invalido">Helbide elektroniko baliogabea</string>
+
+    <!-- Notifications -->
+    <string name="factura_por_vencer">Faktura iraungitzear</string>
+    <string name="factura_vence_hoy">Faktura gaur iraungitzen da</string>
+
+    <!-- Misc -->
+    <string name="configurar_ia">AA konfiguratu</string>
+    <string name="sin_proveedor_ia">Ez dago AA hornitzailerik. Konfiguratu API gakoa Ezarpenetan.</string>
+    <string name="limpiar">Garbitu</string>
+</resources>

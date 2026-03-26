@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EhFactures!</string>
+
+    <!-- Navigation -->
+    <string name="facturas">Factures</string>
+    <string name="clientes">Clients</string>
+    <string name="articulos">Articles</string>
+    <string name="gastos">Despeses</string>
+    <string name="informes">Informes</string>
+    <string name="ajustes">Ajustos</string>
+    <string name="importar">Importar</string>
+    <string name="escaner">Escàner</string>
+
+    <!-- Actions -->
+    <string name="guardar">Desar</string>
+    <string name="cancelar">Cancel·lar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="enviar">Enviar</string>
+    <string name="buscar">Cercar</string>
+    <string name="volver">Tornar</string>
+    <string name="aceptar">Acceptar</string>
+    <string name="nuevo">Nou</string>
+    <string name="duplicar">Duplicar</string>
+    <string name="compartir">Compartir</string>
+    <string name="exportar">Exportar</string>
+
+    <!-- Invoice -->
+    <string name="nueva_factura">Nova factura</string>
+    <string name="emitir">Emetre</string>
+    <string name="cobrar">Cobrar</string>
+    <string name="anular">Anul·lar</string>
+    <string name="convertir">Convertir en factura</string>
+    <string name="presupuesto">Pressupost</string>
+    <string name="borrador">Esborrany</string>
+    <string name="emitida">Emesa</string>
+    <string name="pagada">Pagada</string>
+    <string name="vencida">Vençuda</string>
+    <string name="anulada">Anul·lada</string>
+    <string name="lineas">Línies de factura</string>
+    <string name="anadir_linea">Afegir línia</string>
+    <string name="desde_articulo">Des d\'article</string>
+    <string name="totales">Totals</string>
+    <string name="base_imponible">Base imposable</string>
+    <string name="descuento">Descompte</string>
+    <string name="total">Total</string>
+    <string name="observaciones">Observacions</string>
+    <string name="notas_internas">Notes internes</string>
+    <string name="fecha">Data</string>
+    <string name="vencimiento">Venciment</string>
+    <string name="numero_factura">Número de factura</string>
+
+    <!-- Client -->
+    <string name="nuevo_cliente">Nou client</string>
+    <string name="nombre">Nom</string>
+    <string name="nif">NIF / CIF</string>
+    <string name="email">Correu electrònic</string>
+    <string name="telefono">Telèfon</string>
+    <string name="direccion">Adreça</string>
+    <string name="codigo_postal">Codi postal</string>
+    <string name="ciudad">Ciutat</string>
+    <string name="provincia">Província</string>
+
+    <!-- Article -->
+    <string name="nuevo_articulo">Nou article</string>
+    <string name="referencia">Referència</string>
+    <string name="precio">Preu</string>
+    <string name="unidad">Unitat</string>
+    <string name="categoria">Categoria</string>
+
+    <!-- Expense -->
+    <string name="nuevo_gasto">Nova despesa</string>
+    <string name="concepto">Concepte</string>
+    <string name="importe">Import</string>
+    <string name="proveedor">Proveïdor</string>
+
+    <!-- Reports -->
+    <string name="este_mes">Aquest mes</string>
+    <string name="trimestre">Trimestre</string>
+    <string name="este_ano">Aquest any</string>
+    <string name="todo">Tot</string>
+    <string name="facturado">Facturat</string>
+    <string name="cobrado">Cobrat</string>
+    <string name="pendiente">Pendent</string>
+    <string name="iva_repercutido">IVA repercutit</string>
+    <string name="irpf_retenido">IRPF retingut</string>
+    <string name="beneficio_neto">Benefici net</string>
+    <string name="beneficio_real">Benefici real</string>
+    <string name="top_clientes">Top clients</string>
+    <string name="gastos_por_categoria">Despeses per categoria</string>
+    <string name="exportar_csv">Exportar factures (CSV)</string>
+
+    <!-- Settings -->
+    <string name="identidad_fiscal">Identitat fiscal</string>
+    <string name="contacto">Contacte</string>
+    <string name="impuestos">Impostos</string>
+    <string name="numeracion">Numeració de factures</string>
+    <string name="condiciones_pago">Condicions de pagament</string>
+    <string name="apariencia">Aparença</string>
+    <string name="inteligencia_artificial">Intel·ligència Artificial</string>
+    <string name="copia_seguridad">Còpia de seguretat</string>
+    <string name="acerca_de">Quant a</string>
+    <string name="aplicar_irpf">Aplicar retenció IRPF</string>
+    <string name="exportar_json">Exportar dades (JSON)</string>
+
+    <!-- Features -->
+    <string name="fotos">Fotos</string>
+    <string name="firma">Signatura</string>
+    <string name="plantillas">Plantilles</string>
+    <string name="recurrentes">Recurrents</string>
+    <string name="pdf">PDF</string>
+
+    <!-- Scanner -->
+    <string name="usar_texto">Usar aquest text</string>
+    <string name="permiso_camara">Cal permís de càmera</string>
+
+    <!-- Empty states -->
+    <string name="sin_facturas">Sense factures</string>
+    <string name="sin_clientes">Sense clients</string>
+    <string name="sin_articulos">Sense articles</string>
+    <string name="sin_gastos">Sense despeses</string>
+
+    <!-- Errors -->
+    <string name="nombre_requerido">Nom obligatori</string>
+    <string name="concepto_requerido">Concepte obligatori</string>
+    <string name="nif_invalido">NIF/CIF/NIE no vàlid</string>
+    <string name="email_invalido">Correu electrònic no vàlid</string>
+
+    <!-- Notifications -->
+    <string name="factura_por_vencer">Factura a punt de vèncer</string>
+    <string name="factura_vence_hoy">Factura venç avui</string>
+
+    <!-- Misc -->
+    <string name="configurar_ia">Configurar IA</string>
+    <string name="sin_proveedor_ia">No hi ha proveïdor d\'IA disponible. Configura la teva clau API als Ajustos.</string>
+    <string name="limpiar">Netejar</string>
+</resources>
