@@ -1,7 +1,7 @@
 // app/src/main/java/es/ehfacturas/ui/factura/FacturaEditScreen.kt
 package es.ehfacturas.ui.factura
 
-import android.app.DatePickerDialog
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,6 +37,8 @@ fun FacturaEditScreen(
     val articulos by viewModel.articulos.collectAsStateWithLifecycle()
 
     var mostrarSelectorArticulo by remember { mutableStateOf(false) }
+    var mostrarDatePickerFecha by remember { mutableStateOf(false) }
+    var mostrarDatePickerVencimiento by remember { mutableStateOf(false) }
 
     // Navegar atrás al guardar
     LaunchedEffect(uiState.guardadoOk) {
@@ -105,7 +106,6 @@ fun FacturaEditScreen(
             )
 
             // Fechas
-            val context = LocalContext.current
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -115,18 +115,20 @@ fun FacturaEditScreen(
                     onValueChange = {},
                     label = { Text("Fecha") },
                     modifier = Modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable { mostrarDatePickerFecha = true },
                     readOnly = true,
-                    enabled = true
+                    enabled = false
                 )
                 OutlinedTextField(
                     value = uiState.factura.fechaVencimiento?.let { formatoFecha.format(it) } ?: "",
                     onValueChange = {},
                     label = { Text("Vencimiento") },
                     modifier = Modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable { mostrarDatePickerVencimiento = true },
                     readOnly = true,
-                    enabled = true
+                    enabled = false
                 )
             }
 
@@ -261,6 +263,53 @@ fun FacturaEditScreen(
             )
 
             Spacer(modifier = Modifier.height(32.dp))
+        }
+    }
+
+    // DatePicker fecha
+    if (mostrarDatePickerFecha) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = uiState.factura.fecha.time
+        )
+        DatePickerDialog(
+            onDismissRequest = { mostrarDatePickerFecha = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let {
+                        viewModel.setFecha(Date(it))
+                    }
+                    mostrarDatePickerFecha = false
+                }) { Text("Aceptar") }
+            },
+            dismissButton = {
+                TextButton(onClick = { mostrarDatePickerFecha = false }) { Text("Cancelar") }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
+    // DatePicker vencimiento
+    if (mostrarDatePickerVencimiento) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = uiState.factura.fechaVencimiento?.time
+                ?: (uiState.factura.fecha.time + 30L * 24 * 60 * 60 * 1000)
+        )
+        DatePickerDialog(
+            onDismissRequest = { mostrarDatePickerVencimiento = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let {
+                        viewModel.setFechaVencimiento(Date(it))
+                    }
+                    mostrarDatePickerVencimiento = false
+                }) { Text("Aceptar") }
+            },
+            dismissButton = {
+                TextButton(onClick = { mostrarDatePickerVencimiento = false }) { Text("Cancelar") }
+            }
+        ) {
+            DatePicker(state = datePickerState)
         }
     }
 
