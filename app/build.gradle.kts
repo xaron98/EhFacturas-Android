@@ -69,6 +69,11 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
+    // WorkManager + Hilt Worker
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+
     // MediaPipe LLM Inference (Gemma on-device)
     implementation("com.google.mediapipe:tasks-genai:0.10.22")
 
