@@ -76,6 +76,9 @@ dependencies {
     // TODO: Descomentar cuando el artefacto esté publicado en Google Maven
     // implementation("com.google.android.gms:play-services-ai-generativeai:17.0.0")
 
+    // Vico (charts)
+    implementation("com.patrykandpatrick.vico:compose-m3:2.1.0")
+
     // ZXing (QR codes)
     implementation("com.google.zxing:core:3.5.3")
 
