@@ -69,6 +69,13 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
+    // MediaPipe LLM Inference (Gemma on-device)
+    implementation("com.google.mediapipe:tasks-genai:0.10.22")
+
+    // Google AI Core (Gemini Nano on-device)
+    // TODO: Descomentar cuando el artefacto esté publicado en Google Maven
+    // implementation("com.google.android.gms:play-services-ai-generativeai:17.0.0")
+
     // OkHttp
     implementation(libs.okhttp)
 
