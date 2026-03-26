@@ -15,6 +15,7 @@ import es.ehfacturas.ui.plantillas.PlantillasScreen
 import es.ehfacturas.ui.recurrentes.RecurrentesScreen
 import es.ehfacturas.ui.scanner.ScannerScreen
 import es.ehfacturas.ui.settings.AjustesScreen
+import es.ehfacturas.ui.subscription.SuscripcionScreen
 
 // Rutas de navegación
 object Rutas {
@@ -122,6 +123,11 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable(Rutas.PLANTILLAS) {
             PlantillasScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Rutas.SUSCRIPCION) {
+            SuscripcionScreen(
                 onBack = { navController.popBackStack() }
             )
         }
